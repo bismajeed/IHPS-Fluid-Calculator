@@ -126,6 +126,29 @@ The [`examples/`](examples/) directory contains **fictional** lab payloads for d
 
 ## Architecture
 
+### System overview
+
+```mermaid
+flowchart LR
+  subgraph Client
+    UI["public/index.html<br/>Vanilla HTML/CSS/JS"]
+    API["curl / API client"]
+  end
+
+  subgraph Render["Render (render.yaml)"]
+    Node["Node.js ≥ 20"]
+    Express["Express — server.js"]
+    Rules["Rules engine<br/>pure functions, no ML"]
+  end
+
+  UI -->|"GET /"| Express
+  UI -->|"POST /calculate"| Express
+  API -->|"POST /calculate"| Express
+  Express -->|"serve static"| UI
+  Express --> Rules
+  Node --> Express
+```
+
 | Layer | Implementation |
 |---|---|
 | Runtime | Node.js ≥ 20 (`render.yaml` pins 20.11.0) |
@@ -135,6 +158,37 @@ The [`examples/`](examples/) directory contains **fictional** lab payloads for d
 | Core logic | Deterministic rules engine (`calculateIHPSFluidPlan` → `selectOptimalFluidEnhanced`); pure functions, no external model calls |
 | Hosting | Render (`render.yaml`: `npm install` → `npm start`) |
 
+No database, no external APIs, and no patient data store — admission labs go in, a plan comes out.
+
+### Calculation flow
+
+```mermaid
+flowchart TD
+  Start([Clinician submits labs + weight]) --> POST[POST /calculate]
+  POST --> Parse[Parse JSON body]
+  Parse --> Valid{validateInputs<br/>Na · K · Cl · pH · weight}
+
+  Valid -->|out of range| Err["{ success: false, error }"]
+  Valid -->|ok| Plan[calculateIHPSFluidPlan]
+
+  Plan --> Rate[Infusion rate<br/>1.5× maintenance]
+  Plan --> Fluid[selectOptimalFluidEnhanced<br/>Na + optional glucose → fluid + KCl]
+  Plan --> Bolus[calculateBolusRecommendation<br/>10–20 mL/kg NS]
+  Plan --> Time[calculateCorrectionTime<br/>12 / 24 / 36 h bands]
+  Plan --> Alerts[generateSimpleAlerts<br/>CRITICAL / WARNING]
+  Plan --> Recheck[Recheck interval + next lab check]
+
+  Rate --> Out[JSON fluid management plan]
+  Fluid --> Out
+  Bolus --> Out
+  Time --> Out
+  Alerts --> Out
+  Recheck --> Out
+
+  Out --> UI[Browser renders plan<br/>or client consumes JSON]
+  Err --> UI
+```
+
 A deterministic design was deliberate: in a clinical setting every recommendation must be explainable and reproducible. Same inputs, same plan, each output traceable to a rule.
 
 ---
@@ -142,8 +196,8 @@ A deterministic design was deliberate: in a clinical setting every recommendatio
 ## Running locally
 
 ```bash
-git clone https://github.com/<you>/ihps-fluid-calculator.git
-cd ihps-fluid-calculator
+git clone https://github.com/bismajeed/IHPS-Fluid-Calculator.git
+cd IHPS-Fluid-Calculator
 npm install
 npm start
 ```
