@@ -1,0 +1,19 @@
+{
+  "name": "ihps-fluid-calculator",
+  "version": "1.0.0",
+  "description": "IHPS pre-operative fluid and electrolyte decision-support calculator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["ihps", "pediatrics", "clinical-decision-support", "fluids"],
+  "author": "Bisma Majeed",
+  "license": "MIT"
+}

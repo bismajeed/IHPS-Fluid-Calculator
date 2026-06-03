@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+*.log
+
+# Never commit real clinical exports (PHI)
+*.csv
+*.xlsx
+*.xls
+*.pdf

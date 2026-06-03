@@ -1,0 +1,9 @@
+{
+  "_comment": "Synthetic illustrative case — not real patient data. Demonstrates moderate depletion branch.",
+  "sodium": 133,
+  "potassium": 3.8,
+  "chloride": 92,
+  "ph": 7.52,
+  "weight": 3.5,
+  "glucose": 3.6
+}

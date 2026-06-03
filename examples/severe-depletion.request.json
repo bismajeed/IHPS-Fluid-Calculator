@@ -1,0 +1,11 @@
+{
+  "_comment": "Synthetic illustrative case — not real patient data. Demonstrates severe depletion, alerts, and D10 fluid branch.",
+  "sodium": 128,
+  "potassium": 2.7,
+  "chloride": 65,
+  "ph": 7.58,
+  "weight": 2.8,
+  "glucose": 2.2,
+  "hct": 52,
+  "lactate": 2.4
+}

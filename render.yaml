@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ihps-fluid-calculator
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    rootDir: .
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
