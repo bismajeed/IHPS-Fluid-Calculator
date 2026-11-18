@@ -1,6 +1,6 @@
 # IHPS Fluid Calculator
 
-> Clinical decision-support tool for fluid and electrolyte management in infants with **Infantile Hypertrophic Pyloric Stenosis (IHPS)** — deterministic protocol logic, deployed to production on Render. **No patient data is included in this repository.**
+> Clinical decision-support tool for fluid and electrolyte management in infants with **Infantile Hypertrophic Pyloric Stenosis (IHPS)** — deterministic protocol logic, deployed as a web app on Render (research prototype). **No patient data is included in this repository.**
 
 IHPS infants typically arrive with a **hypochloremic, hypokalemic metabolic alkalosis** from persistent vomiting. Pyloromyotomy is unsafe until chloride, potassium, and acid–base status are corrected. That pre-op resuscitation decision is repetitive, parameter-heavy, and easy to get subtly wrong under time pressure.
 
@@ -216,7 +216,7 @@ curl -s -X POST http://localhost:3000/calculate \
 
 ## Deployment
 
-Deployed to production on **Render** via `render.yaml`:
+Deployed as a web app on **Render** via `render.yaml`:
 
 - Service: `ihps-fluid-calculator`
 - Build command: `npm install`
@@ -267,8 +267,8 @@ MIT — see [LICENSE](LICENSE).
 
 ## Author
 
-**Bisma Majeed** — Forward Deployed Engineer
-[LinkedIn](https://linkedin.com/in/bismaajeed)
+**Bisma Majeed**, Applied AI Architect
+[LinkedIn](https://linkedin.com/in/bisma-majeed-29423a107)
 
 ---
 
